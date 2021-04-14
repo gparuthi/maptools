@@ -1,6 +1,7 @@
-import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api"
+import { GoogleMap, InfoWindow, LoadScript, Marker } from "@react-google-maps/api"
 import React, { useEffect, useRef, useState } from "react"
 
+// from https://medium.com/@allynak/how-to-use-google-map-api-in-react-app-edb59f64ac9d
 const MapContainer = ({ array, API_Key }) => {
   const [selected, setSelected] = useState({})
 
@@ -13,6 +14,7 @@ const MapContainer = ({ array, API_Key }) => {
 
   const onSelect = (item) => {
     console.log(item)
+    setSelected(item)
   }
 
   const mapStyles = {
@@ -31,7 +33,7 @@ const MapContainer = ({ array, API_Key }) => {
           id="example-map"
           mapContainerStyle={mapStyles}
           draggable={true}
-          zoom={10}
+          zoom={12}
           center={array && array[0] ? array[0].location : defaultCenter}
         >
           {array
@@ -46,6 +48,18 @@ const MapContainer = ({ array, API_Key }) => {
                 )
               })
             : null}
+            {
+            selected.location && 
+            (
+              <InfoWindow
+              position={selected.location}
+              clickable={true}
+              onCloseClick={() => setSelected({})}
+            >
+              <p style={{color: "black"}}>{selected.title}</p>
+            </InfoWindow>
+            )
+         }
         </GoogleMap>
       </LoadScript>
     </>
