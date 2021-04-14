@@ -10,14 +10,31 @@ const Home = () => {
   const [places, setPlaces] = useState([])
   const [geocodeAPIKey, setGeocodeAPIKey] = useState()
 
-  useEffect(() => {
-    Promise.all(
-      addresses.map((address) => fetchPlace(address, geocodeAPIKey))
-    ).then((places) => {
-      setPlaces(places)
-      console.log(places)
-    })
-  }, [addresses])
+  useEffect(()=>{
+    const timer = setInterval(async ()=>{
+      // pop address and add the place to places
+      const q = [...addresses]
+      console.log(q.length)
+      if (q.length){
+        const address = q.pop()
+        const place = await fetchPlace(address, geocodeAPIKey)
+        setPlaces([...places, place])
+        setAddresses([...q])
+      }
+    },1000)
+    return ()=>{
+      clearTimeout(timer)
+    }
+  },[addresses])
+
+  // useEffect(() => {
+  //   Promise.all(
+  //     addresses.map((address) => fetchPlace(address, geocodeAPIKey))
+  //   ).then((places) => {
+  //     setPlaces(places)
+  //     console.log(places)
+  //   })
+  // }, [addresses])
 
   const onTextChange = (e) => {
     let inputValue: string = e.target.value
@@ -45,7 +62,7 @@ const Home = () => {
           ></Textarea>
         </Box>
         <Box flex={1} border="4px">
-          <MapContainer API_Key={geocodeAPIKey} array={places} />
+          {geocodeAPIKey && <MapContainer API_Key={geocodeAPIKey} array={places} />}
         </Box>
       </Flex>
     </Box>
