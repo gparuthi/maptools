@@ -6,5 +6,6 @@ export interface Coords {
 export interface Place {
   id: string
   location: Coords
+  address: string
   title?: string
 }

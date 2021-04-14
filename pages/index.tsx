@@ -19,9 +19,14 @@ const Home = () => {
       const q = [...addresses]
       console.log(q.length)
       if (q.length) {
-        const address = q.pop()
-        const place = await fetchPlace(address, geocodeAPIKey)
-        setPlaces([...places, place])
+        const [address, title] = q.pop().split(" | ")
+        try {
+          const place = await fetchPlace(address, title, geocodeAPIKey)
+          setPlaces([...places, place])
+        } catch (error) {
+          console.error(error)
+        }
+
         setAddresses([...q])
       }
     }, 1000)
@@ -57,7 +62,11 @@ const Home = () => {
             onChange={onTextChange}
           ></Textarea>
           <HStack flex={0.1}>
-           <Box w={10}><a href="https://github.com/gparuthi/maptools"><GithubIcon/></a></Box>
+            <Box w={10}>
+              <a href="https://github.com/gparuthi/maptools">
+                <GithubIcon />
+              </a>
+            </Box>
           </HStack>
         </Flex>
         <Box flex={1} border="4px">

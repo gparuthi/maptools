@@ -56,7 +56,7 @@ const MapContainer = ({ array, API_Key }) => {
               clickable={true}
               onCloseClick={() => setSelected({})}
             >
-              <p style={{color: "black"}}>{selected.title}</p>
+              <p style={{color: "black"}}>{selected.title} | {selected.address}</p>
             </InfoWindow>
             )
          }
