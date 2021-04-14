@@ -1,34 +1,26 @@
-import { Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react"
-import { useState } from "react"
+import Map from "../lib/google/Map"
 
-const MarkerFromQuery = ({ title, name, q }) => {
-  const [loc, setLoc] = useState([null, null])
-  const onClick = ()=>{
-    console.log(title)
+function addMarkers(map, links) {
+  links.forEach((link, index) => {
+    const marker = new window.google.maps.Marker({
+      map,
+      position: link.coords,
+      label: `${index + 1}`,
+      title: link.title,
+    })
+    marker.addListener(`click`, () => {
+      window.location.href = link.url
+    })
+  })
+}
+
+const MapContainer = ({places}) => {
+  const mapProps = {
+    options: { center: places[0].coords, zoom: 12 },
+    onMount: addMarkers, 
+    onMountProps: places, 
   }
-  return (
-    <Marker onClick={onClick} title={title} name={name}  />
-  )
+  return <Map {...mapProps} />
 }
 
-class Test extends Marker {
- render(){
-  return <Marker name={"Current location"} />
- }
-}
-
-const MapContainer = ({ google }) => (
-  <Map google={google} zoom={13}>
-    <Test />
-    <MarkerFromQuery name="test" title="test2" />
-    <InfoWindow>
-      <div>
-        <h1>test</h1>
-      </div>
-    </InfoWindow>
-  </Map>
-)
-
-export default GoogleApiWrapper({
-  apiKey: "AIzaSyCQUW6EwMcjEAfcMibW97dGvZKLClkGCj8",
-})(MapContainer)
+export default MapContainer
