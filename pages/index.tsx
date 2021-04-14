@@ -11,7 +11,7 @@ import { DataExtractor } from "./extract"
 const Home = () => {
   const [addresses, setAddresses] = useState([])
   const [places, setPlaces] = useState([])
-  const [geocodeAPIKey, setGeocodeAPIKey] = useState()
+  const geocodeAPIKey = "AIzaSyBW4H_d7n2mhJreDkuWHfrJRpy59V-drIc"
 
   useEffect(() => {
     const timer = setInterval(async () => {
@@ -29,7 +29,7 @@ const Home = () => {
 
         setAddresses([...q])
       }
-    }, 1000)
+    }, 200)
     return () => {
       clearTimeout(timer)
     }
@@ -40,19 +40,11 @@ const Home = () => {
     setPlaces([])
     setAddresses(addressList)
   }
-  const onKeyChange = (e) => {
-    setGeocodeAPIKey(e.target.value)
-  }
 
   return (
     <Box w="vw">
       <Flex direction="row">
         <Flex direction="column" flex={0.6} h="100vh">
-          <Input
-            flex={0.1}
-            placeholder="Google Cloud API key"
-            onChange={onKeyChange}
-          />
           <Box flex={1}>
             <DataExtractor onDone={onTextChange} />
           </Box>
