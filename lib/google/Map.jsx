@@ -1,6 +1,6 @@
 import { functions, isEqual, omit } from "lodash"
 import React, { useState, useEffect, useRef } from "react"
-function Map({ options, onMount, className, onMountProps }) {
+function Map({ options, onMount, onMountProps }) {
   const ref = useRef()
   const [map, setMap] = useState()
   useEffect(() => {
@@ -21,7 +21,7 @@ function Map({ options, onMount, className, onMountProps }) {
   return (
     <div
       style={{ height: `100vh` }}
-      {...{ ref, className }}
+      {...{ ref }}
     />
   )
 }

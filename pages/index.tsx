@@ -20,7 +20,7 @@ const place: Place = {
 const initAddresses = ["3338 Valencia St, San Francisco"]
 
 const Home = () => {
-  const [addresses, setAddresses] = useState(initAddresses)
+  const [addresses, setAddresses] = useState([])
   const [places, setPlaces] = useState([])
   const [geocodeAPIKey, setGeocodeAPIKey] = useState(
     "AIzaSyDtKEsYNpwrVl5Xqhibq2lqt_nHNbfyLgc"
@@ -34,20 +34,30 @@ const Home = () => {
       const res = await fetchPlace(address)
       const data = await res.json()
       const allResults = data.results
-      console.log(allResults[0])
+      
       const place: Place = {
         coords: allResults[0].geometry.location,
         title: allResults[0].formatted_address,
       }
+      console.log(place)
+      
       setPlaces([...places, place])
     })
-  }, [])
+  }, [addresses])
+
+  const onTextChange = (e)=>{
+    let inputValue: string = e.target.value
+    const addressList = inputValue.split('\n').filter(s=>s.length>4).slice(0,4)
+    console.log(addressList)
+    setPlaces([])
+    setAddresses(addressList)
+  }
 
   return (
     <Box w="vw">
       <Flex direction="row">
         <Box flex={0.6}>
-          <Textarea placeholder="Enter address lines here" h="100vh"></Textarea>
+          <Textarea placeholder="Enter address lines here" h="100vh" onChange={onTextChange}></Textarea>
         </Box>
         <Box flex={1} border="4px">
           <MapContainer places={places} />
