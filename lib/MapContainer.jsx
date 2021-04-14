@@ -11,8 +11,8 @@ const MapContainer = ({ array, API_Key }) => {
   const [selected, setSelected] = useState({})
 
   const defaultCenter = {
-    lat: 41.3851,
-    lng: 2.1734,
+    lat: 37.7467497,
+    lng: -122.4205566,
   }
 
   const onSelect = (item) => {

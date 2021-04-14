@@ -62,8 +62,8 @@ export const DataExtractor = ({ onDone }) => {
             onChange={(e) => setAddressSelector(e.target.value)}
           />
         </FormControl>
-        <Button w={100} onClick={onSubmit}>
-          Submit
+        <Button w={200} onClick={onSubmit}>
+          Show data on map
         </Button>
       </Stack>
     </Box>

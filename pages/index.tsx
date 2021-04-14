@@ -1,5 +1,6 @@
 import { Image } from "@chakra-ui/image"
 import { Input } from "@chakra-ui/input"
+import { Divider } from "@chakra-ui/layout"
 import { HStack } from "@chakra-ui/layout"
 import { Box, Flex, Stack } from "@chakra-ui/layout"
 import { Textarea } from "@chakra-ui/textarea"
@@ -9,7 +10,7 @@ import { GithubIcon } from "../lib/Icons"
 import MapContainer from "../lib/MapContainer"
 import { DataExtractor } from "./extract"
 
-const API_LATENCY = 2000
+const API_LATENCY = 200
 
 const Home = () => {
   const [addresses, setAddresses] = useState([])
@@ -47,6 +48,16 @@ const Home = () => {
     <Box w="vw">
       <Flex direction="row">
         <Flex direction="column" flex={0.6} h="100vh">
+          <Box>
+            <strong>What is this tool?</strong>
+            <p>Many websites show a bunch of places to their audience without showing a map view. Wouldn't it be nice to show these places on a map?</p>
+            <p>Examples:</p>
+            <ul>
+              <li>- <a href="https://sf.gov/vaccine-sites">SF Govt Vaccine Sites</a> shows a list of vaccine sites. </li>
+              <li>- Interesting location in a city list <a href="https://www.timeout.com/san-francisco/nightlife/best-nightclubs-in-san-francisco?itm_source=parsely-api">this</a></li>
+            </ul>
+          </Box>
+          <Divider m={10}/>
           <Box flex={1}>
             <DataExtractor onDone={onTextChange} />
           </Box>
