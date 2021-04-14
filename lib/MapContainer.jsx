@@ -38,7 +38,6 @@ const MapContainer = ({ array, API_Key }) => {
         >
           {array
             ? array.map((item) => {
-              console.log(item)
                 return (
                   <Marker
                     key={item.id}

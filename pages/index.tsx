@@ -17,7 +17,6 @@ const Home = () => {
     const timer = setInterval(async () => {
       // pop address and add the place to places
       const q = [...addresses]
-      console.log(q.length)
       if (q.length) {
         const [address, title] = q.pop().split(" | ")
         try {
