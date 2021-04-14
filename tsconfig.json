@@ -22,7 +22,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "lib/MapContainer.jsx"  ],
   "exclude": [
     "node_modules"
   ]
