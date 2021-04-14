@@ -1,7 +1,7 @@
 # Show address lines on a Map 
 
-1. Create a project and generate a [Google Cloud API key](https://console.cloud.google.com/apis/dashboard)
-2. Add Geocoding API and Maps JavaScript API to the Library
+1. Create a project on Google Cloud and generate an [ API key](https://console.cloud.google.com/apis/dashboard)
+2. Add 1)Geocoding API and 2)Maps JavaScript API to the project library
 3. Go to https://maptools-gparuthi.vercel.app and paste the key there
 4. Type or paste addresses in the text area and see the pins show up in realtime
 
