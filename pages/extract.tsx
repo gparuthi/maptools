@@ -38,16 +38,16 @@ export const DataExtractor = ({ onDone }) => {
     <Box>
       <Stack>
         <FormControl id="webpage">
-          <FormLabel>Webpage URL</FormLabel>
+          <FormLabel>Webpage URL to scrape the data from</FormLabel>
           <Input
             value={webpage}
-            placeholder="Webpage URL"
+            placeholder="Webpage URL to scrape the data from"
             onChange={(e) => setWebpage(e.target.value)}
           />
         </FormControl>
 
         <FormControl id="titleSelector">
-         <FormLabel>Title css selector</FormLabel>
+          <FormLabel>Place's title css selector</FormLabel>
           <Input
             value={titleSelector}
             placeholder="title selector code"
@@ -55,7 +55,7 @@ export const DataExtractor = ({ onDone }) => {
           />
         </FormControl>
         <FormControl id="addressSelector">
-         <FormLabel>Address css selector</FormLabel>
+          <FormLabel>Place's address css selector</FormLabel>
           <Input
             value={addressSelector}
             placeholder="address selector code"

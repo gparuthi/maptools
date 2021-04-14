@@ -8,6 +8,9 @@ import fetchPlace from "../lib/geocode"
 import { GithubIcon } from "../lib/Icons"
 import MapContainer from "../lib/MapContainer"
 import { DataExtractor } from "./extract"
+
+const API_LATENCY = 2000
+
 const Home = () => {
   const [addresses, setAddresses] = useState([])
   const [places, setPlaces] = useState([])
@@ -28,7 +31,7 @@ const Home = () => {
 
         setAddresses([...q])
       }
-    }, 200)
+    }, API_LATENCY)
     return () => {
       clearTimeout(timer)
     }
