@@ -1,7 +1,9 @@
-import Map from "../lib/google/Map"
+import { Place } from "../pages"
+import Map from "./google/Map"
 
 function addMarkers(map, links) {
   links.forEach((link, index) => {
+    // @ts-ignore
     const marker = new window.google.maps.Marker({
       map,
       position: link.coords,
@@ -9,14 +11,18 @@ function addMarkers(map, links) {
       title: link.title,
     })
     marker.addListener(`click`, () => {
-      window.location.href = link.url
+      console.log(link.title)
     })
   })
 }
-
-const MapContainer = ({places}) => {
+interface Props {
+  places: Place[]
+}
+const MapContainer = ({places}: Props) => {
+  const initCoords = {lat: 10, lng:20} 
+  const initCenter = places[0]? places[0].coords : initCoords
   const mapProps = {
-    options: { center: places[0].coords, zoom: 12 },
+    options: { center: initCenter, zoom: 12 },
     onMount: addMarkers, 
     onMountProps: places, 
   }

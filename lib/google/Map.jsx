@@ -11,8 +11,7 @@ function Map({ options, onMount, className, onMountProps }) {
       setMap(new window.google.maps.Map(ref.current, { ...options }))
     if (!window.google) {
       const script = document.createElement(`script`)
-      script.src =
-        `https://maps.googleapis.com/maps/api/js?key=AIzaSyCQUW6EwMcjEAfcMibW97dGvZKLClkGCj8`
+      script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyCQUW6EwMcjEAfcMibW97dGvZKLClkGCj8`
       document.head.append(script)
       script.addEventListener(`load`, onLoad)
       return () => script.removeEventListener(`load`, onLoad)
@@ -21,7 +20,7 @@ function Map({ options, onMount, className, onMountProps }) {
   if (map && typeof onMount === `function`) onMount(map, onMountProps)
   return (
     <div
-      style={{ height: `60vh`, margin: `1em 0`, borderRadius: `0.5em` }}
+      style={{ height: `100vh` }}
       {...{ ref, className }}
     />
   )
