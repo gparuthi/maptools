@@ -1,4 +1,5 @@
 # Show address lines on a Map 
+Using NextJS + Typescript + ChakraUI
 
 1. Create a project on Google Cloud and generate an [ API key](https://console.cloud.google.com/apis/dashboard)
 2. Add 1)Geocoding API and 2)Maps JavaScript API to the project library
