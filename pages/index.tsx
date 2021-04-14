@@ -1,8 +1,11 @@
+import { Image } from "@chakra-ui/image"
 import { Input } from "@chakra-ui/input"
-import { Box, Flex } from "@chakra-ui/layout"
+import { HStack } from "@chakra-ui/layout"
+import { Box, Flex, Stack } from "@chakra-ui/layout"
 import { Textarea } from "@chakra-ui/textarea"
 import { useEffect, useState } from "react"
 import fetchPlace from "../lib/geocode"
+import { GithubIcon } from "../lib/Icons"
 import MapContainer from "../lib/MapContainer"
 
 const Home = () => {
@@ -42,14 +45,21 @@ const Home = () => {
   return (
     <Box w="vw">
       <Flex direction="row">
-        <Box flex={0.6}>
-          <Input placeholder="API key" onChange={onKeyChange} />
+        <Flex direction="column" flex={0.6} h="100vh">
+          <Input
+            flex={0.1}
+            placeholder="Google Cloud API key"
+            onChange={onKeyChange}
+          />
           <Textarea
+            flex={1}
             placeholder="Enter address lines here"
-            h="100vh"
             onChange={onTextChange}
           ></Textarea>
-        </Box>
+          <HStack flex={0.1}>
+           <Box w={10}><a href="https://github.com/gparuthi/maptools"><GithubIcon/></a></Box>
+          </HStack>
+        </Flex>
         <Box flex={1} border="4px">
           {geocodeAPIKey && (
             <MapContainer API_Key={geocodeAPIKey} array={places} />
