@@ -1,4 +1,4 @@
-import { Place } from "../utils/types"
+import { Place } from "./types"
 
 const fetchPlace = async (address, geocodeAPIKey) => {
   const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${geocodeAPIKey}`
