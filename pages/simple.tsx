@@ -7,7 +7,7 @@ import { useEffect, useState } from "react"
 import fetchPlace from "../lib/geocode"
 import { GithubIcon } from "../lib/Icons"
 import MapContainer from "../lib/MapContainer"
-import { DataExtractor } from "./extract"
+
 const Home = () => {
   const [addresses, setAddresses] = useState([])
   const [places, setPlaces] = useState([])
@@ -35,8 +35,11 @@ const Home = () => {
     }
   }, [addresses])
 
-  const onTextChange = (inputValue: string) => {
+  const onTextChange = (e) => {
+    let inputValue: string = e.target.value
     const addressList = inputValue.split("\n").filter((s) => s.length > 4)
+    // .slice(0, 4)
+    console.log(addressList)
     setPlaces([])
     setAddresses(addressList)
   }
@@ -53,10 +56,11 @@ const Home = () => {
             placeholder="Google Cloud API key"
             onChange={onKeyChange}
           />
-          <Box flex={1}>
-            <DataExtractor onDone={onTextChange} />
-          </Box>
-
+          <Textarea
+            flex={1}
+            placeholder="Enter address lines here"
+            onChange={onTextChange}
+          ></Textarea>
           <HStack flex={0.1}>
             <Box w={10}>
               <a href="https://github.com/gparuthi/maptools">
