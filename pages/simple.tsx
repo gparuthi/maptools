@@ -1,64 +1,34 @@
-import { Image } from "@chakra-ui/image"
-import { Input } from "@chakra-ui/input"
-import { HStack } from "@chakra-ui/layout"
-import { Box, Flex, Stack } from "@chakra-ui/layout"
+import { Box, Flex, HStack } from "@chakra-ui/layout"
 import { Textarea } from "@chakra-ui/textarea"
-import { useEffect, useState } from "react"
-import fetchPlace from "../lib/geocode"
 import { GithubIcon } from "../lib/Icons"
 import MapContainer from "../lib/MapContainer"
+import { geocodeAPIKey, usePlaces } from "./index"
 
 const Home = () => {
-  const [addresses, setAddresses] = useState([])
-  const [places, setPlaces] = useState([])
-  const [geocodeAPIKey, setGeocodeAPIKey] = useState()
-
-  useEffect(() => {
-    const timer = setInterval(async () => {
-      // pop address and add the place to places
-      const q = [...addresses]
-      if (q.length) {
-        const [address, title] = q.pop().split(" | ")
-        try {
-          const place = await fetchPlace(address, title, geocodeAPIKey)
-          setPlaces([...places, place])
-        } catch (error) {
-          console.error(error)
-        }
-
-        setAddresses([...q])
-      }
-    }, 1000)
-    return () => {
-      clearTimeout(timer)
-    }
-  }, [addresses])
+  const initAddresses = ["golden gate bridge", "alcatraz", "fort mason"]
+  const [places, setAddresses, setPlaces] = usePlaces(initAddresses)
 
   const onTextChange = (e) => {
     let inputValue: string = e.target.value
-    const addressList = inputValue.split("\n").filter((s) => s.length > 4)
+    const addressList = inputValue
+      .split("\n")
+      .map((s) => s.trim())
+      .filter((s) => s.length > 4)
     // .slice(0, 4)
     console.log(addressList)
     setPlaces([])
     setAddresses(addressList)
-  }
-  const onKeyChange = (e) => {
-    setGeocodeAPIKey(e.target.value)
   }
 
   return (
     <Box w="vw">
       <Flex direction="row">
         <Flex direction="column" flex={0.6} h="100vh">
-          <Input
-            flex={0.1}
-            placeholder="Google Cloud API key"
-            onChange={onKeyChange}
-          />
           <Textarea
             flex={1}
             placeholder="Enter address lines here"
             onChange={onTextChange}
+            defaultValue={initAddresses.join("\n")}
           ></Textarea>
           <HStack flex={0.1}>
             <Box w={10}>
@@ -69,9 +39,7 @@ const Home = () => {
           </HStack>
         </Flex>
         <Box flex={1} border="4px">
-          {geocodeAPIKey && (
-            <MapContainer API_Key={geocodeAPIKey} array={places} />
-          )}
+          <MapContainer API_Key={geocodeAPIKey} array={places} />
         </Box>
       </Flex>
     </Box>
