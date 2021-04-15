@@ -9,7 +9,7 @@ import { Place } from "../lib/types"
 import { DataExtractor } from "./extract"
 
 const API_LATENCY = 200
-export const geocodeAPIKey = "AIzaSyBW4H_d7n2mhJreDkuWHfrJRpy59V-drIc"
+export const geocodeAPIKey = "AIzaSyBiQjrzkXOahDnwdvPq99de_jfuuYjihU0"
 
 export const usePlaces = (initAddresses) => {
   const [addresses, setAddresses] = useState<string[]>(initAddresses)
