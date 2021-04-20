@@ -1,13 +1,9 @@
-import { Link } from "@chakra-ui/layout"
-import { Box, Divider, Flex, HStack } from "@chakra-ui/layout"
+import { Box, Divider, Flex, HStack, Link } from "@chakra-ui/layout"
 import Head from "next/head"
-import { useEffect, useState } from "react"
 import { geocodeAPIKey } from "../lib/config"
-import fetchPlace from "../lib/geocode"
 import { usePlaces } from "../lib/hooks"
 import { GithubIcon } from "../lib/Icons"
 import MapContainer from "../lib/MapContainer"
-import { Place } from "../lib/types"
 import { DataExtractor } from "./extract"
 
 const Home = () => {

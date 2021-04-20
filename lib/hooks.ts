@@ -8,7 +8,7 @@ export const useDebounce = (value: string) => {
   useEffect(() => {
     const handler = setTimeout(() => {
       setDebouncedQuery(value)
-    }, 400)
+    }, 2000)
     return () => {
       clearTimeout(handler)
     }
