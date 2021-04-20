@@ -1,8 +1,9 @@
 import { Box, Flex, HStack } from "@chakra-ui/layout"
 import { Textarea } from "@chakra-ui/textarea"
+import { geocodeAPIKey } from "../lib/config"
+import { usePlaces } from "../lib/hooks"
 import { GithubIcon } from "../lib/Icons"
 import MapContainer from "../lib/MapContainer"
-import { geocodeAPIKey, usePlaces } from "./index"
 
 const Home = () => {
   const initAddresses = ["golden gate bridge", "alcatraz", "fort mason"]

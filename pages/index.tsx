@@ -2,42 +2,13 @@ import { Link } from "@chakra-ui/layout"
 import { Box, Divider, Flex, HStack } from "@chakra-ui/layout"
 import Head from "next/head"
 import { useEffect, useState } from "react"
+import { geocodeAPIKey } from "../lib/config"
 import fetchPlace from "../lib/geocode"
+import { usePlaces } from "../lib/hooks"
 import { GithubIcon } from "../lib/Icons"
 import MapContainer from "../lib/MapContainer"
 import { Place } from "../lib/types"
 import { DataExtractor } from "./extract"
-
-const API_LATENCY = 200
-export const geocodeAPIKey = "AIzaSyBiQjrzkXOahDnwdvPq99de_jfuuYjihU0"
-
-export const usePlaces = (initAddresses) => {
-  const [addresses, setAddresses] = useState<string[]>(initAddresses)
-  const [places, setPlaces] = useState<Place[]>([])
-
-  useEffect(() => {
-    const timer = setInterval(async () => {
-      // pop address and add the place to places
-      const q = [...addresses]
-      if (q.length) {
-        const [address, title] = q.pop().split(" | ")
-        try {
-          const place = await fetchPlace(address, title, geocodeAPIKey)
-          setPlaces([...places, place])
-        } catch (error) {
-          console.error(error)
-        }
-
-        setAddresses([...q])
-      }
-    }, API_LATENCY)
-    return () => {
-      clearTimeout(timer)
-    }
-  }, [addresses])
-
-  return [places, setAddresses, setPlaces] as const
-}
 
 const Home = () => {
   const [places, setAddresses, setPlaces] = usePlaces([])
