@@ -3,12 +3,14 @@ import { API_LATENCY, geocodeAPIKey } from "./config"
 import fetchPlace from "./geocode"
 import { Place } from "./types"
 
+export const DEBOUNCE_LATENCY = 1000
+
 export const useDebounce = (value: string) => {
   const [debouncedValue, setDebouncedQuery] = useState(value)
   useEffect(() => {
     const handler = setTimeout(() => {
       setDebouncedQuery(value)
-    }, 2000)
+    }, DEBOUNCE_LATENCY)
     return () => {
       clearTimeout(handler)
     }
